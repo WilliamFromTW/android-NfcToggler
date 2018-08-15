@@ -6,4 +6,6 @@
 
     <string name="appwidget_text">NFC</string>
 
+    <string name="quick_setting_tile_label">NFC</string>
+
 </resources>

@@ -1,7 +1,10 @@
 package nfc.inmethod.nfctoggler;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.nfc.NfcAdapter;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import java.io.DataOutputStream;
@@ -10,7 +13,7 @@ import java.lang.reflect.Method;
 
 public class NfcController {
     private static final String TAG = "NfcController";
-
+    private static boolean bGranted = false;
     public static boolean checkNfcEnableStatus(Context context) {
         return NfcAdapter.getDefaultAdapter (context).isEnabled();
     }
@@ -34,24 +37,28 @@ public class NfcController {
         }
         return result;
     }
-    private static void grantPermission(Context context){
-        try {  Process p = null;
+    public static void grantPermission(Context context){
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_SECURE_SETTINGS)
+                != PackageManager.PERMISSION_GRANTED) {
             try {
-                p = Runtime.getRuntime().exec("su");
-            } catch (IOException e) {
+                Process p = null;
+                try {
+                    p = Runtime.getRuntime().exec("su");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                DataOutputStream os = new DataOutputStream(p.getOutputStream());
+                try {
+                    os.writeBytes("pm grant " + context.getPackageName() + " android.permission.WRITE_SECURE_SETTINGS \n");
+                    os.writeBytes("exit\n");
+                    os.flush();
+                    p.waitFor();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-            DataOutputStream os = new DataOutputStream(p.getOutputStream());
-            try {
-                os.writeBytes("pm grant "+ context.getPackageName() +" android.permission.WRITE_SECURE_SETTINGS \n");
-                os.writeBytes("exit\n");
-                os.flush();
-                p.waitFor();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } catch (Exception e){
-            e.printStackTrace();
         }
     }
 }

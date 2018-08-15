@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
+        NfcController.grantPermission(this);
         return true
     }
 
@@ -34,7 +35,6 @@ class MainActivity : AppCompatActivity() {
             R.id.action_settings ->{
                 val builder = AlertDialog.Builder(this@MainActivity)
                 builder.setTitle("NFC Toggler")
-
                 builder.setMessage("Version Name : " + this.packageManager.getPackageInfo(this.packageName,0).versionName +"\nVersion Code : " +this.packageManager.getPackageInfo(this.packageName,0).versionCode)
                 builder.setNeutralButton("Ok", null)
                 builder.setCancelable(true)

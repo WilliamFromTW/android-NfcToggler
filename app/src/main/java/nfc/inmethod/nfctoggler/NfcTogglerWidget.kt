@@ -6,7 +6,6 @@ import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
-import android.net.Uri
 import android.widget.RemoteViews
 
 /**
@@ -30,17 +29,12 @@ class NfcTogglerWidget : AppWidgetProvider() {
     }
 
     companion object {
-        fun updateText(context: Context, appWidgetManager: AppWidgetManager, appWidgetId: Int, sText: String) {
-            val views = RemoteViews(context.getPackageName(), R.layout.new_app_widget)
-            views.setTextColor(R.id.appwidget_text, Color.CYAN);
-            views.setTextViewText(R.id.appwidget_text, sText)
-            appWidgetManager.updateAppWidget(appWidgetId, views)
-        }
+
 
         fun updateAppWidget(context: Context, appWidgetManager: AppWidgetManager, appWidgetId: Int) {
 
             val widgetText = context.getString(R.string.appwidget_text)
-            val views = RemoteViews(context.getPackageName(), R.layout.new_app_widget)
+            val views = RemoteViews(context.getPackageName(), R.layout.nfc_toggler_widget)
             views.setTextViewText(R.id.appwidget_text, widgetText)
             val intent = Intent(context, SwitchingActivity::class.java)
             //intent.putExtra("appWidgetId", appWidgetId);

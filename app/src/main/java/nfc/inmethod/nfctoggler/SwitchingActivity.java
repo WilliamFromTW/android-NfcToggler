@@ -28,7 +28,7 @@ public class SwitchingActivity  extends Activity {
             e.printStackTrace();
         }
         Toast.makeText(this, "NFC Status = "+NfcController.checkNfcEnableStatus( this), Toast.LENGTH_SHORT).show();
-        updateAllWidgets(this,R.layout.new_app_widget,NfcTogglerWidget.class);
+        updateAllWidgets(this,R.layout.nfc_toggler_widget,NfcTogglerWidget.class);
 
         finish();
     }

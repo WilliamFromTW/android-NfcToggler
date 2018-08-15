@@ -2,11 +2,15 @@ package nfc.inmethod.nfctoggler
 
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 
 import kotlinx.android.synthetic.main.activity_main.*
+import nfc.inmethod.nfctoggler.R.mipmap.ic_launcher
+
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,7 +31,17 @@ class MainActivity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_settings -> true
+            R.id.action_settings ->{
+                val builder = AlertDialog.Builder(this@MainActivity)
+                builder.setTitle("NFC Toggler")
+
+                builder.setMessage("Version Name : " + this.packageManager.getPackageInfo(this.packageName,0).versionName +"\nVersion Code : " +this.packageManager.getPackageInfo(this.packageName,0).versionCode)
+                builder.setNeutralButton("Ok", null)
+                builder.setCancelable(true)
+                val alert = builder.create()
+                alert.show()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }

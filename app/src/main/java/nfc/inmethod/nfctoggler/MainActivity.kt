@@ -9,6 +9,9 @@ import android.view.MenuItem
 
 import kotlinx.android.synthetic.main.activity_main.*
 import nfc.inmethod.nfctoggler.R.mipmap.ic_launcher
+import android.content.Intent
+
+
 
 
 
@@ -23,7 +26,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
+        val startServiceIntent = Intent(this, BootUpService::class.java)
+        startService(startServiceIntent)
         NfcController.grantPermission(this);
+        /* 收到廣播後開啟目的Service */
         return true
     }
 

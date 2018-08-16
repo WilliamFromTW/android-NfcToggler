@@ -9,5 +9,3 @@ Needs ROOT
 2. Android Studio 3.1.4 or above
 3. Kotlin and java Code    
 
-#### Known Bugs    
-Widget/QuickSetting Icon doesn't fresh when using system NFC setting    

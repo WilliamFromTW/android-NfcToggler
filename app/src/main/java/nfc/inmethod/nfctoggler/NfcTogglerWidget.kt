@@ -36,7 +36,7 @@ class NfcTogglerWidget : AppWidgetProvider() {
             val widgetText = context.getString(R.string.appwidget_text)
             val views = RemoteViews(context.getPackageName(), R.layout.nfc_toggler_widget)
             views.setTextViewText(R.id.appwidget_text, widgetText)
-            val intent = Intent(context, SwitchingActivity::class.java)
+            val intent = Intent(context, NfcWidgetSwitchingActivity::class.java)
             //intent.putExtra("appWidgetId", appWidgetId);
             val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
 

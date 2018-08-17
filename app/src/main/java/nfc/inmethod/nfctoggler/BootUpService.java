@@ -3,11 +3,9 @@ package nfc.inmethod.nfctoggler;
 import android.app.Notification;
 import android.app.Service;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.ServiceConnection;
 import android.nfc.NfcAdapter;
 import android.os.Build;
 import android.os.IBinder;
@@ -67,18 +65,16 @@ public class BootUpService extends Service {
                     private void getStatus(int intExtra) {
                         switch (intExtra) {
                             case NfcAdapter.STATE_OFF:
-                                SwitchingActivity.updateAllWidgets(ApplicationContextHelper.getContext(), R.layout.nfc_toggler_widget, NfcTogglerWidget.class);
+                                NfcWidgetSwitchingActivity.updateAllWidgets(ApplicationContextHelper.getContext(), R.layout.nfc_toggler_widget, NfcTogglerWidget.class);
                                 break;
                             case NfcAdapter.STATE_ON:
-                                SwitchingActivity.updateAllWidgets(ApplicationContextHelper.getContext(), R.layout.nfc_toggler_widget, NfcTogglerWidget.class);
+                                NfcWidgetSwitchingActivity.updateAllWidgets(ApplicationContextHelper.getContext(), R.layout.nfc_toggler_widget, NfcTogglerWidget.class);
                                 break;
                             case NfcAdapter.STATE_TURNING_OFF:
                                 break;
                             case NfcAdapter.STATE_TURNING_ON:
                                 break;
                         }
-                        String a = intExtra + "";
-                        Log.d(TAG, a);
                         synchronized (t) {
                             if (t != null && t.getState() == State.WAITING) {
                                 t.notify();
@@ -88,6 +84,8 @@ public class BootUpService extends Service {
                 };
                 IntentFilter intentFilter = new IntentFilter("android.nfc.action.ADAPTER_STATE_CHANGED");
                 registerReceiver(mReceiver, intentFilter);
+                // first
+                NfcWidgetSwitchingActivity.updateAllWidgets(ApplicationContextHelper.getContext(), R.layout.nfc_toggler_widget, NfcTogglerWidget.class);
 
                 while (running) {
                     Log.i(TAG, "Service running!!");

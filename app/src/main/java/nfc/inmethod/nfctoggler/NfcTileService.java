@@ -12,8 +12,8 @@ import android.util.Log;
 
 import static java.lang.Thread.sleep;
 
-public class QuickSettingsService extends TileService {
-    private final String LOG_TAG = "QuickSettingsService";
+public class NfcTileService extends TileService {
+    private final String LOG_TAG = "NfcTileService";
     private static boolean running = false;
     private static Thread t;
 
@@ -64,7 +64,7 @@ public class QuickSettingsService extends TileService {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                SwitchingActivity.updateAllWidgets(ApplicationContextHelper.getContext(), R.layout.nfc_toggler_widget, NfcTogglerWidget.class);
+                NfcWidgetSwitchingActivity.updateAllWidgets(ApplicationContextHelper.getContext(), R.layout.nfc_toggler_widget, NfcTogglerWidget.class);
             }
         });
         thread.start();
@@ -105,8 +105,6 @@ public class QuickSettingsService extends TileService {
                             case NfcAdapter.STATE_TURNING_ON:
                                 break;
                         }
-                        String a = intExtra + "";
-                        Log.d(LOG_TAG, a);
                         synchronized (t) {
                             if (t != null && t.getState() == State.WAITING) {
                                 t.notify();
@@ -116,13 +114,13 @@ public class QuickSettingsService extends TileService {
                 };
                 IntentFilter intentFilter = new IntentFilter("android.nfc.action.ADAPTER_STATE_CHANGED");
                 registerReceiver(mReceiver, intentFilter);
-
+                // first
+                correctIconStatus();
                 while (running) {
                     Log.i(LOG_TAG, "Service running!!");
                     synchronized (this) {
                         try {
                             wait();
-//                        sleep(360000);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }

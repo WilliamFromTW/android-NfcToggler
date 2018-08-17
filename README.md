@@ -1,8 +1,7 @@
-## Android NFC Toggler    
+## Android NFC Toggler(Needs Root)    
 ####  Two ways to Enable/Disable NFC     
 1. Widget     
 2. QuickSetting     
-Needs ROOT    
 
 #### Environment    
 1. Android 7.0 or above    

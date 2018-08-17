@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import static java.lang.Thread.sleep;
 
-public class SwitchingActivity extends Activity {
+public class NfcWidgetSwitchingActivity extends Activity {
 
 
     @Override

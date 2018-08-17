@@ -12,9 +12,6 @@ import nfc.inmethod.nfctoggler.R.mipmap.ic_launcher
 import android.content.Intent
 
 
-
-
-
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +26,6 @@ class MainActivity : AppCompatActivity() {
         val startServiceIntent = Intent(this, BootUpService::class.java)
         startService(startServiceIntent)
         NfcController.grantPermission(this);
-        /* 收到廣播後開啟目的Service */
         return true
     }
 
@@ -38,10 +34,10 @@ class MainActivity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_settings ->{
+            R.id.action_settings -> {
                 val builder = AlertDialog.Builder(this@MainActivity)
                 builder.setTitle("NFC Toggler")
-                builder.setMessage("Version Name : " + this.packageManager.getPackageInfo(this.packageName,0).versionName +"\nVersion Code : " +this.packageManager.getPackageInfo(this.packageName,0).versionCode)
+                builder.setMessage("Version Name : " + this.packageManager.getPackageInfo(this.packageName, 0).versionName + "\nVersion Code : " + this.packageManager.getPackageInfo(this.packageName, 0).versionCode)
                 builder.setNeutralButton("Ok", null)
                 builder.setCancelable(true)
                 val alert = builder.create()

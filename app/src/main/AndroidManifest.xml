@@ -29,7 +29,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SwitchingActivity"
+            android:name=".NfcWidgetSwitchingActivity"
             android:theme="@android:style/Theme.NoDisplay"></activity>
 
         <receiver android:name=".NfcTogglerWidget">
@@ -42,7 +42,7 @@
                 android:resource="@xml/new_app_widget_info" />
         </receiver>
         <service
-            android:name=".QuickSettingsService"
+            android:name=".NfcTileService"
             android:icon="@drawable/ic_nfc_on"
             android:label="@string/quick_setting_tile_label"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">

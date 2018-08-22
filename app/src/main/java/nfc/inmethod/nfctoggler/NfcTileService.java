@@ -28,13 +28,15 @@ public class NfcTileService extends TileService {
     }
 
     private void correctIconStatus() {
+
         Log.d(LOG_TAG, "correctIconStatus  current stat = " + Integer.toString(getQsTile().getState()));
         Icon icon;
+
         if (NfcController.checkNfcEnableStatus(this)) {
-            icon = Icon.createWithResource(getApplicationContext(), R.drawable.ic_nfc_on);
+            icon = Icon.createWithResource(this.getApplicationContext(), R.drawable.ic_nfc_on);
             getQsTile().setState(Tile.STATE_ACTIVE);
         } else {
-            icon = Icon.createWithResource(getApplicationContext(), R.drawable.ic_nfc_off);
+            icon = Icon.createWithResource(this.getApplicationContext(), R.drawable.ic_nfc_off);
             getQsTile().setState(Tile.STATE_INACTIVE);
         }
         getQsTile().setIcon(icon);

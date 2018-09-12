@@ -83,6 +83,15 @@ public class BootUpService extends Service {
                     }
                 };
                 IntentFilter intentFilter = new IntentFilter("android.nfc.action.ADAPTER_STATE_CHANGED");
+                try {
+                    Log.d(TAG,"sleep 5s , wait  nfc to enable ");
+                    Thread.sleep(10000);
+                    Log.d(TAG,"sleep 5s  success!");
+                } catch (InterruptedException e) {
+                    Log.d(TAG,"sleep 5s  failed!");
+                    e.printStackTrace();
+                }
+
                 registerReceiver(mReceiver, intentFilter);
                 // first
                 NfcWidgetSwitchingActivity.updateAllWidgets(ApplicationContextHelper.getContext(), R.layout.nfc_toggler_widget, NfcTogglerWidget.class);

@@ -115,6 +115,14 @@ public class NfcTileService extends TileService {
                     }
                 };
                 IntentFilter intentFilter = new IntentFilter("android.nfc.action.ADAPTER_STATE_CHANGED");
+                try {
+                    Log.d(LOG_TAG,"sleep 5s , wait  nfc to enable");
+                    Thread.sleep(10000);
+                    Log.d(LOG_TAG,"sleep 5s  success!");
+                } catch (InterruptedException e) {
+                    Log.d(LOG_TAG,"sleep 5s  failed!");
+                    e.printStackTrace();
+                }
                 registerReceiver(mReceiver, intentFilter);
                 // first
                 correctIconStatus();
